@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Cabs, Autos & Car Rentals | CabRide</title>
+    <link rel="stylesheet" href="Cab.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="shortcut icon" href="logo.png" type="img/x-icon">
+    <style>
+     body{
+      background-image:url("bg.jpg");
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      background-size:100%100%;
+      }
+ .panel-container {
+  background-color: black;
+  box-shadow: 0 0 10px black;
+  border-radius: 4px;
+  font-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px 25px;
+  color:white;
+  margin: 4em auto 4em auto;
+   width: 50%;
+	
+}
+
+.panel-container strong {
+  line-height: 20px;
+}
+
+.ratings-container {
+  display: flex;
+  margin: 20px 0;
+}
+
+.rating {
+  flex: 1;
+  cursor: pointer;
+  padding: 20px;
+  margin: 10px 5px;
+}
+
+.rating:hover,
+.rating.active {
+  border-radius: 4px;
+  box-shadow: 0 0 10px white;
+}
+
+.rating img {
+  width: 40px;
+}
+
+.rating small {
+  color: white;
+  display: inline-block;
+  margin: 10px 0 0;
+}
+
+.rating:hover small,
+.rating.active small {
+  color: white;
+}
+
+.btn {
+  background-color: #f8b56d;
+  color: black;
+  border: 0;
+  border-radius: 4px;
+  padding: 12px 30px;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.fa-heart {
+  color: red;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+    </style>
+</head>
+<body>
+   
+        <header class="header">
+            <a href="#" id="logo"><img src="logo.png" width="150px"></a>
+            <nav class="navbar">
+                <a href="cab.html">home</a>
+                <a href="services.html">services</a>
+                <a href="select.html">select</a>
+                <a href="payment.html">payment</a>
+                <a href="feedback.html">feedback</a>
+                <a href="about.html">about</a>
+            </nav>
+            <a href="#" id="menu-bars" class="fas fa-bars"></a>
+        </header>
+    </div>
+                    <div id="panel" class="panel-container">
+      <strong>How satisfied are you with our <br /> customer support performance?</strong>
+      <div class="ratings-container">
+        <div class="rating">
+          <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-17.png" alt="">
+          <small>Unhappy</small>
+        </div>
+
+        <div class="rating">
+          <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-3.png" alt=""/>
+          <small>Neutral</small>
+        </div>
+
+        <div class="rating active">
+          <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-30.png" alt=""/>
+          <small>Satisfied</small>
+        </div>
+      </div>
+      <button class="btn" id="send">Send Review</button>
+    </div>
+    <script>
+const ratings = document.querySelectorAll('.rating')
+const ratingsContainer = document.querySelector('.ratings-container')
+const sendBtn = document.querySelector('#send')
+const panel = document.querySelector('#panel')
+let selectedRating = 'Satisfied'
+
+ratingsContainer.addEventListener('click', (e) => {
+    if(e.target.parentNode.classList.contains('rating') && e.target.nextElementSibling) {
+        removeActive()
+        e.target.parentNode.classList.add('active')
+        selectedRating = e.target.nextElementSibling.innerHTML
+    } else if(
+        e.target.parentNode.classList.contains('rating') &&
+        e.target.previousSibling &&
+        e.target.previousElementSibling.nodeName === 'IMG'
+    ) {
+        removeActive()
+        e.target.parentNode.classList.add('active')
+        selectedRating = e.target.innerHTML
+    }
+
+})
+
+sendBtn.addEventListener('click', (e) => {
+    panel.innerHTML = `
+        <i class="fas fa-heart"></i>
+        <strong>Thank You!</strong>
+        <br>
+        <strong>Feedback: ${selectedRating}</strong>
+        <p>We'll use your feedback to improve our customer support</p>
+    `
+})
+
+function removeActive() {
+    for(let i = 0; i < ratings.length; i++) {
+        ratings[i].classList.remove('active')
+    }
+}
+</script>
+</body>
+</html>
